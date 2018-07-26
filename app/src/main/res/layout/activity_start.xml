@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="kr.dkshin.android.databindingdemo.User" />
+        <import type="androidx.databinding.ObservableArrayList"/>
+
+        <variable name="userList" type="androidx.databinding.ObservableArrayList&lt;User&gt;"/>
+        <!--<variable-->
+            <!--name="userList"-->
+            <!--type="kr.dkshin.android.databindingdemo." />-->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StartActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/youngJumpRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toTopOf="@+id/addButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startAdapter="@{userList}"
+            tools:listitem="@layout/item_start_view" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+
+            android:text="ADD"
+            app:layout_constraintBottom_toTopOf="@+id/removeButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/removeButton"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="REMOVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
