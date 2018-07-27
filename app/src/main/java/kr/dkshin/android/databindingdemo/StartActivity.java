@@ -1,7 +1,6 @@
 package kr.dkshin.android.databindingdemo;
 
 import android.os.Bundle;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +39,9 @@ public class StartActivity extends AppCompatActivity implements StartViewModel.S
         activityStartBinding.youngJumpRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         activityStartBinding.youngJumpRecyclerView.setItemAnimator(new DefaultItemAnimator());
         activityStartBinding.youngJumpRecyclerView.setAdapter(startAdapter);
-        activityStartBinding.addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                android.util.Log.e("SHIN","activity onClickAddButton");
-                User user = new User(startAdapter.getItemCount()+1, "조아윤", "2");
-//        startViewModel.addStringItemsToList(user);
-                observableArrayList.add(user);
-            }
-        });
+        activityStartBinding.addButton.setOnClickListener(view -> onClickAddButton());
+
+        activityStartBinding.removeButton.setOnClickListener(view -> onClickRemoveButton());
     }
 
     @Override
@@ -62,8 +55,7 @@ public class StartActivity extends AppCompatActivity implements StartViewModel.S
     @Override
     public void onClickRemoveButton() {
         android.util.Log.e("SHIN","activity onClickRemoveButton");
-        User user = new User(2, "조아윤", "2");
 //        startViewModel.removeStringItemsToList(user);
-        observableArrayList.remove(user);
+        observableArrayList.remove(startAdapter.getItemCount()-1);
     }
 }
