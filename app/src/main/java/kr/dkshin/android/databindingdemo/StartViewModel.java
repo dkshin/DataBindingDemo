@@ -1,48 +1,55 @@
 package kr.dkshin.android.databindingdemo;
 
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by SHIN on 2018. 7. 26..
  */
-public class StartViewModel {
-    public final ObservableList<User> observableArrayList = new ObservableArrayList<>();
-    StartListener startListener;
+public class StartViewModel extends ViewModel {
 
-    public StartViewModel(StartListener startListener) {
-        this.startListener = startListener;
+    private MutableLiveData<List<User>> users;
+
+    public StartViewModel() {
+        users = new MutableLiveData<>();
+        loadUsers();
     }
 
-    public void addStringItemsToList(User user) {
-        android.util.Log.e("SHIN","addStringItemsToList");
-        observableArrayList.add(user);
-//        observableArrayList.addAll(list);
+    public LiveData<List<User>> getUsers() {
+        return users;
     }
 
-    public void removeStringItemsToList(User user) {
-        android.util.Log.e("SHIN","removeStringItemsToList");
-        observableArrayList.remove(user);
-//        observableArrayList.addAll(list);
+    private void loadUsers() {
+        Log.e("SHIN", "loadUsers");
+        List<User> userList = new ArrayList<>();
+        userList.add(new User(0, "신동규", "31"));
+        users.setValue(userList);
     }
 
-    public ObservableList<User> getObservableArrayList() {
-        return observableArrayList;
+    public void addUser() {
+        Log.e("SHIN", "addUser");
+        List<User> userList = users.getValue();
+        userList.add(new User(userList.get(userList.size()-1).getId() + 1, "신동규", "31"));
+        users.setValue(userList);
     }
 
-    public void onItemAddClick(){
-        android.util.Log.e("SHIN","onItemAddClick");
-        startListener.onClickAddButton();
+    public void removeUser() {
+        Log.e("SHIN", "removeUser");
+        List<User> userList = users.getValue();
+        User user = userList.get(userList.size()-1);
+        userList.remove(user);
+        users.setValue(userList);
     }
 
-    public void onItemRemoveClick(){
-        android.util.Log.e("SHIN","onItemRemoveClick");
-        startListener.onClickRemoveButton();
+    @Override
+    protected void onCleared() {
+        Log.e("SHIN", "onCleared");
+        super.onCleared();
     }
-
-    public interface StartListener{
-        void onClickAddButton();
-        void onClickRemoveButton();
-    }
-
 }

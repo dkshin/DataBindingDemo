@@ -3,6 +3,7 @@ package kr.dkshin.android.databindingdemo;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -20,10 +21,10 @@ public class StartAdapter extends RecyclerView.Adapter<StartAdapter.StartViewHol
 
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private List<User> mList;
+    private List<User> mList = new ArrayList<>();
 
-    public StartAdapter(List<User> list) {
-        this.mList = list;
+    public StartAdapter() {
+
     }
 
     @Override
@@ -98,12 +99,12 @@ public class StartAdapter extends RecyclerView.Adapter<StartAdapter.StartViewHol
 
     public class StartItemViewModel {
 
-        public final ObservableField<String> text;
+        public final ObservableField<User> userObservableField;
         User mValue;
 
         public StartItemViewModel(User value) {
             this.mValue = value;
-            text = new ObservableField<>("ID : "+mValue.getId()+" 이름 : "+ mValue.getName()+" 나이 : "+mValue.getAge());
+            userObservableField = new ObservableField<>(mValue);
         }
     }
 

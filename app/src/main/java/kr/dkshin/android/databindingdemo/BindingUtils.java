@@ -16,10 +16,9 @@ package kr.dkshin.android.databindingdemo;///*
 // */
 
 
-import java.util.List;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by amitshekhar on 11/07/17.
@@ -31,13 +30,9 @@ public final class BindingUtils {
         // This class is not publicly instantiable
     }
 
-    @BindingAdapter({"startAdapter"})
-    public static void addStartItems(RecyclerView recyclerView, List<User> list) {
-        StartAdapter adapter = (StartAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-//            adapter.clearItems();
-            adapter.addItems(list);
-        }
+    @BindingAdapter({"customText"})
+    public static void setCustomText(TextView textView, User user) {
+        textView.setText("ID : "+user.getId()+" 이름 : "+ user.getName()+" 나이 : "+user.getAge());
     }
 
 }

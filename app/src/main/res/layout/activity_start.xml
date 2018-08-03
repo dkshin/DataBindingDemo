@@ -6,13 +6,10 @@
     <data>
 
         <import type="android.view.View" />
-        <import type="kr.dkshin.android.databindingdemo.User" />
-        <import type="androidx.databinding.ObservableArrayList"/>
 
-        <variable name="userList" type="androidx.databinding.ObservableArrayList&lt;User&gt;"/>
-        <!--<variable-->
-            <!--name="userList"-->
-            <!--type="kr.dkshin.android.databindingdemo." />-->
+        <variable
+            name="viewModel"
+            type="kr.dkshin.android.databindingdemo.StartViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,14 +26,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:startAdapter="@{userList}"
             tools:listitem="@layout/item_start_view" />
 
         <Button
             android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-
+            android:onClick="@{() -> viewModel.addUser()}"
             android:text="ADD"
             app:layout_constraintBottom_toTopOf="@+id/removeButton"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -47,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:text="REMOVE"
+            android:onClick="@{() -> viewModel.removeUser()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
